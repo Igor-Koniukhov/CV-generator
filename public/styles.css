@@ -1,23 +1,6 @@
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 20px;
-    max-width: 800px;
-    margin: auto;
-    color: #333;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-}
-
-.header, .section {
-    margin-bottom: 20px;
-}
 
 .header {
     text-align: center;
-    border-bottom: 2px solid #000;
     padding-bottom: 10px;
 }
 
@@ -28,6 +11,47 @@ h1, h2, h3, h4, h5, h6 {
 
 .header p {
     font-size: 14px;
+    text-align: justify;
+}
+
+.work-period {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    color: #555555c2;
+}
+
+.degree-establishment, .degree-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.personal-info {
+    display: flex;
+    justify-content: space-around;
+}
+
+.personal-info div {
+    border-left: 1px solid #555555c2;
+    padding-left: 6px;
+    margin-bottom: 14px;
+    font-style: italic;
+}
+
+.personal-info:first-child {
+    border-left: unset;
+}
+
+.container .degree-details div:first-of-type,
+.container .degree-details span:first-of-type, .country {
+    color: #555555c2;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.work-period span {
+    font-style: italic;
 }
 
 .header a {
@@ -47,7 +71,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .job, .education, .skills, .internship {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .job h3, .education h3, .internship h3 {
@@ -57,7 +81,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .job span, .education span, .internship span {
     display: block;
-    font-size: 14px;
     color: #555;
 }
 

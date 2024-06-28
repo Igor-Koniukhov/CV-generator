@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     buttons.className = 'buttons';
     
     const saveButton = document.createElement('button');
+    saveButton.className = 'btn-save'
     saveButton.textContent = 'Save';
     saveButton.addEventListener('click', () => {
       element.contentEditable = false;
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     const cancelButton = document.createElement('button');
+    cancelButton.className = 'btn-cancel'
     cancelButton.textContent = 'Cancel';
     cancelButton.addEventListener('click', () => {
       element.innerHTML = element.originalContent;
@@ -26,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
       buttons.remove();
     });
     
-    buttons.appendChild(saveButton);
     buttons.appendChild(cancelButton);
+    buttons.appendChild(saveButton);
     element.appendChild(buttons);
     
     element.addEventListener('blur', (event) => {
@@ -52,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ content: containerContent }),
+      body: JSON.stringify({content: containerContent}),
     })
       .then(response => response.text())
       .then(data => {
