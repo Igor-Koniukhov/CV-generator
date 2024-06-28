@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
-const { JSDOM } = require('jsdom');
+const {JSDOM} = require('jsdom');
 const puppeteer = require('puppeteer');
 
 const app = express();
@@ -10,6 +10,17 @@ const PORT = 3001;
 
 app.use(bodyParser.json());
 app.use(express.static('.'));
+
+const ensureIndexHtmlExists = () => {
+  const publicHtmlPath = path.join(__dirname, 'public', 'index.html');
+  const templateHtmlPath = path.join(__dirname, 'public', 'sample', 'index.html');
+  
+  if (!fs.existsSync(publicHtmlPath)) {
+    console.log('index.html not found in public directory. Copying from sample template...');
+    fs.copyFileSync(templateHtmlPath, publicHtmlPath);
+    console.log('index.html copied successfully.');
+  }
+};
 
 const getTemplates = () => {
   const templatesDir = path.join(__dirname, 'templates');
@@ -28,7 +39,7 @@ app.get('/templates', (req, res) => {
 });
 
 app.post('/apply-template', (req, res) => {
-  const { template } = req.body;
+  const {template} = req.body;
   const templatesDir = path.join(__dirname, 'templates', template);
   const publicDir = path.join(__dirname, 'public');
   
@@ -100,13 +111,13 @@ app.get('/download-pdf', async (req, res) => {
     
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto(`http://localhost:${PORT}/editor`, { waitUntil: 'networkidle0' });
+    await page.goto(`http://localhost:${PORT}/editor`, {waitUntil: 'networkidle0'});
     
     const pdfBuffer = await page.pdf({
       format: 'A4',
       printBackground: true,
       preferCSSPageSize: true,
-      margin: { top: '0px', bottom: '0px', left: '0px', right: '0px' },
+      margin: {top: '0px', bottom: '0px', left: '0px', right: '0px'},
       scale: scale
     });
     
@@ -125,6 +136,8 @@ app.use(express.static('public'));
 app.get('/editor', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
+ensureIndexHtmlExists();
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

@@ -2,3 +2,5 @@
 node_modules
 .code
 .env
+/public/styles.css
+/public/index.html
