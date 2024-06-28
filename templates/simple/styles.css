@@ -1,23 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    padding: 20px;
-    background-color: #f4f4f4;
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 
 header {
     text-align: center;
@@ -33,6 +14,7 @@ header h1 {
 header p {
     font-size: 14px;
     color: #333;
+    text-align: justify;
 }
 
 section {
@@ -57,7 +39,6 @@ section h2 {
 }
 
 .job span, .degree span {
-    font-size: 14px;
     color: #999;
     display: block;
     margin-bottom: 5px;
