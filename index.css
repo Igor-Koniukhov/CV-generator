@@ -33,7 +33,7 @@ h1 {
 }
 
 .template-icon img {
-    width: 150px;
+    width: 300px;
     object-fit: cover;
     border-radius: 3px;
 }

@@ -115,9 +115,10 @@ app.get('/download-pdf', async (req, res) => {
     
     const pdfBuffer = await page.pdf({
       format: 'A4',
+      width: '210mm',
       printBackground: true,
       preferCSSPageSize: true,
-      margin: {top: '0px', bottom: '0px', left: '0px', right: '0px'},
+      margin: {top: 0, bottom: 0, left: 0, right: 0},
       scale: scale
     });
     
