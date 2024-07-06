@@ -8,7 +8,8 @@ const {
   renderHomePageHandler,
   templateHandler,
   applyTemplateHandler,
-  saveTemplateChangesHandler
+  saveTemplateChangesHandler,
+  downloadCompressedFileHandler
 } = require('./handlers/handlers')
 
 const app = express();
@@ -25,6 +26,7 @@ app.get('/download-pdf', downloadPdfHandler);
 
 app.use(express.static('public'));
 app.get('/editor', editorHandler);
+app.get('/download', downloadCompressedFileHandler)
 
 ensureIndexHtmlExists();
 

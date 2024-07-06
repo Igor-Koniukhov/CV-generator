@@ -1,9 +1,13 @@
 const puppeteer = require("puppeteer");
 const path = require("path");
-const {getTemplates}=require('../utils/helpers')
+const {getTemplates} = require('../utils/helpers')
 const fs = require("fs");
 const {JSDOM} = require("jsdom");
-const {PORT}=require('../utils/constants')
+const archiver = require('archiver');
+const {glob} = require('glob')
+const temp = require('temp');
+const {PORT} = require('../utils/constants')
+const cheerio = require('cheerio');
 
 const downloadPdfHandler = async (req, res) => {
   try {
@@ -32,6 +36,60 @@ const downloadPdfHandler = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 }
+
+const downloadCompressedFileHandler = async (req, res) => {
+  
+  const tempFilePath = temp.path({ suffix: '.zip' });
+  const output = fs.createWriteStream(tempFilePath);
+  const archive = archiver('zip', {
+    zlib: {level: 9}
+  })
+  
+  output.on('close', () => {
+    res.download(tempFilePath, 'compressed.zip', (err) => {
+      if (err) {
+        console.error(err)
+      }
+      fs.unlink(tempFilePath, (err)=>{
+        if(err){
+          console.error(err)
+        }
+      })
+    })
+  })
+  
+  archive.on('error', (err) => {
+    throw err
+  })
+  
+  archive.pipe(output)
+  
+ const files = await glob(["public/*.{html,css}"]);
+  files.forEach(file => {
+    let fileContent = fs.readFileSync(file, 'utf8');
+    
+    if (path.extname(file) === '.html') {
+      // Load the HTML content using cheerio
+      const $ = cheerio.load(fileContent);
+      
+      // Remove the specified elements
+      $('#download-pdf, #scale-slider, #scale-value, .back-button, #download-btn, .back-button').remove();
+      
+      // Get the modified HTML content
+      fileContent = $.html();
+    }
+    
+    // Write the modified content to a temporary file
+    const tempFile = temp.path({ suffix: path.extname(file) });
+    fs.writeFileSync(tempFile, fileContent);
+    
+    // Add the temporary file to the archive
+    archive.file(tempFile, { name: path.relative('public', file) });
+  });
+  
+  archive.finalize();
+}
+
 const applyTemplateHandler = (req, res) => {
   const {template} = req.body;
   const templatesDir = path.join(__dirname, '../templates', template);
@@ -117,5 +175,6 @@ module.exports = {
   renderHomePageHandler,
   templateHandler,
   applyTemplateHandler,
-  saveTemplateChangesHandler
+  saveTemplateChangesHandler,
+  downloadCompressedFileHandler
 }
