@@ -85,6 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.open(`/download-pdf?scale=${scale}`, '_blank');
   });
   
+  document.getElementById('download-btn').addEventListener('click', () => {
+    window.location.href = '/download';
+  });
+  
   const scaleSlider = document.getElementById('scale-slider');
   const scaleValue = document.getElementById('scale-value');
   scaleSlider.addEventListener('input', (event) => {
