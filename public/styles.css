@@ -1,103 +1,96 @@
 
-.header {
+
+header {
     text-align: center;
-    padding-bottom: 10px;
-}
-
-.header h1 {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.header p {
-    font-size: 14px;
-    text-align: justify;
-}
-
-.work-period {
-    font-size: 14px;
-    display: flex;
-    justify-content: space-between;
-    color: #555555c2;
-}
-
-.degree-establishment, .degree-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.personal-info {
-    display: flex;
-    justify-content: space-around;
-}
-
-.personal-info div {
-    border-left: 1px solid #555555c2;
-    padding-left: 6px;
-    margin-bottom: 14px;
-    font-style: italic;
-}
-
-.personal-info:first-child {
-    border-left: unset;
-}
-
-.container .degree-details div:first-of-type,
-.container .degree-details span:first-of-type, .country {
-    color: #555555c2;
-    font-style: italic;
-    font-size: 12px;
-}
-
-.work-period span {
-    font-style: italic;
-}
-
-.header a {
-    color: #000;
-    text-decoration: none;
-}
-
-.section-title {
-    font-size: 18px;
-    font-weight: bold;
-    border-bottom: 1px solid #000;
-    margin-bottom: 10px;
-}
-
-.section-content {
     margin-bottom: 20px;
 }
 
-.job, .education, .skills, .internship {
+header h1 {
+    font-size: 24px;
+    color: #4A148C;
+    margin-bottom: 5px;
+}
+
+header p {
+    font-size: 14px;
+    color: #333;
+    text-align: justify;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+section h2 {
+    font-size: 18px;
+    color: #4A148C;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.job, .degree {
     margin-bottom: 15px;
 }
 
-.job h3, .education h3, .internship h3 {
+.job h3, .degree h3 {
     font-size: 16px;
-    font-weight: bold;
+    color: #333;
 }
 
-.job span, .education span, .internship span {
+.job span, .degree span {
+    color: #999;
     display: block;
-    color: #555;
+    margin-bottom: 5px;
 }
 
-.job ul, .internship ul {
+ul {
+    list-style-type: disc;
     padding-left: 20px;
 }
 
-.skills-table {
-    width: 100%;
-    border-collapse: collapse;
+ul li {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
 }
 
-.skills-table td {
-    padding: 5px 10px;
-    border: 1px solid #ddd;
+.additional-info ul {
+    list-style-type: none;
+    padding-left: 0;
 }
 
-.skills-table td:nth-child(2), .skills-table td:nth-child(4) {
-    text-align: right;
+.additional-info ul li {
+    margin-bottom: 5px;
 }
+
+.additional-info ul li strong {
+    color: #4A148C;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 20px;
+    }
+
+    header p {
+        font-size: 12px;
+    }
+
+    section h2 {
+        font-size: 16px;
+    }
+
+    job h3, .degree h3 {
+        font-size: 14px;
+    }
+
+    job span, .degree span {
+        font-size: 12px;
+    }
+
+    ul li {
+        font-size: 12px;
+    }
+}
+
